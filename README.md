@@ -1,9 +1,7 @@
 # webchat
 
 # Instalacão
-curl -fsSL get.docker.com -o get-docker.sh <br/>
-sh get-docker.sh
-
+wget get.docker.com -O- | sh
 wget http://install.chatapp.com.br/webchat.txt -O- | sh
 
 # Telas
