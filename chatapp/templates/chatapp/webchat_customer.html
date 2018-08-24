@@ -1,0 +1,75 @@
+
+<!DOCTYPE html><html class=''>
+
+{% load staticfiles %}
+{% load i18n %}
+<head>
+
+<script src="{% static 'chatapp/js/jquery-3.3.1.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'bootstrap-4.0.0/dist/js/popper.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'bootstrap-4.0.0/dist/js/bootstrap.min.js' %}"></script>
+
+
+
+
+<link href="{% static 'bootstrap-4.0.0/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+
+
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<link rel='stylesheet prefetch' href="{% static 'chatapp/css/reset.min.css' %}">
+<link rel='stylesheet' href="{% static 'fontawesome-5.2.0/css/all.min.css' %}" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<style class="cp-pen-styles">
+{% include "chatapp/chat_layout.css" %}
+</style>
+</head>
+<body>
+
+<div id="frame">
+
+  <div id="sidepanel">
+    <div id="profile">
+      <div class="wrap">
+
+        <p>WebChat</p>
+        <p>{% trans "Usuário" %}: {{user.username}}</p> &nbsp; 
+        <a href="/admin/logout" style="color: #FECC66;"> {% trans "Sair" %} </a>
+       
+
+      </div>
+    </div>
+    <div id="search">
+      <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+      <input type="text" id="searchcontact" name="searchcontact" placeholder="Localizar..." />
+    </div>
+    <div id="contacts">
+
+    </div>
+    <div id="bottom-bar">
+    </div>
+  </div>
+  <div class="content" id="chatcontent">
+
+  </div>
+</div>
+
+
+<script>
+
+  $( document ).ready(function() {
+    $('#contacts').load('{% url "chat_list_customer" %}');
+
+    $("#searchcontact").keyup(function (e) {
+      var q = $("#searchcontact").val();
+        $('#contacts').load('{% url "chat_list_customer" %}?q='+q);
+    });
+
+    
+    
+  });
+</script>
+
+
+</body></html>

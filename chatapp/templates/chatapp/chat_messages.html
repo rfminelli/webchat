@@ -1,0 +1,55 @@
+{% for message in messages %}
+  {% if message.user %}
+        <li class="replies"> 
+          <p>
+           <b class="chatuser"> {{message.user}}: </b> <br/>
+        {% if message.message_media %}
+          {{ message.message_media|safe }}
+        {% else %}
+          {% if message.message_location %}
+            Latitude: {{ message.latitude}} <br/> Longitude: {{message.longitude}} <br/>
+            {{ message.message_location|safe }}
+          {% else %}
+            {{message.message_chat_html|safe}}
+          {% endif %}
+        {% endif %}<br/>
+           <span style="font-size: 10px; float: right;"> {{message.message_date_display}} </span>
+          </p>
+          
+        </li>
+  {% else %}
+        <li class="sent">
+          <p>
+          {% if message.chat.contact.isgroup %}
+              <b>{% if message.contact %}
+                  {{message.contact}} 
+               {% else %} 
+                  {{message.chat.contact}} 
+                {% endif %} </b> <br/>
+          {% endif %}
+
+          {% if message.message_media %}
+            {{ message.message_media|safe }}
+          {% else %}
+              {% if message.message_location %}
+                Latitude: {{ message.latitude}} <br/> Longitude: {{message.longitude}} <br/>
+                {{ message.message_location|safe }}
+              {% else %}
+                
+                {% if message.message_document %}
+                  {{message.message_document|safe}}
+                  <i class="{{message.document_type}}" aria-hidden="true"></i>
+                {% else %}
+                  {{message.message_chat_html|safe}}
+                {% endif %}
+
+            {% endif %}
+          {% endif %}
+          <br/>
+          <span style="font-size: 10px; float: right;"> {{message.message_date_display}} </span>
+          </p>
+          
+        </li>
+
+  {% endif %}
+{% endfor %}

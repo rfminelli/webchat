@@ -1,0 +1,89 @@
+{% load i18n %}
+
+<ul>
+  {% for chat in object_list %}
+
+    <li class="contact">
+
+
+      <div class="wrap" onclick="$('#chatcontent').load('{% url "chat_view" chat.id %}');">
+        <span class="contact-status {{chat.contact_status}}"></span>
+        {% if chat.contact.profile_pic %}
+          <img src="{{chat.contact.profile_pic}}" alt="{{chat.contact}}" />
+        {% endif %}
+        <div class="meta">
+
+
+          <p class="name">{{chat.contact}}
+          {% if chat.contact.ctype == 'whatsapp' %}
+          <i class="fab fa-whatsapp"></i>
+          {% endif %}
+
+          {% if chat.contact.ctype == 'facebook' %}
+              <i class="fab fa-facebook"></i>
+          {% endif %}
+          </p>
+
+
+
+          <p class="preview">{% for lm in chat.last_message %} {{ lm.display_text }} {% endfor %}</p>
+  {% if chat.owner %}
+  <button type="button" style="padding-bottom: 0px; padding-top: 0px;" class="btn btn-outline-warning btn-sm">{{chat.owner.username}} </button>
+  {% endif %}
+
+
+        </div>
+
+
+      </div>
+
+    </li>
+
+  {% endfor %}
+</ul>
+
+<script type="text/javascript">
+
+var hasNewChatsTimer;
+var last_messageall_id;
+clearInterval(hasNewChatsTimer);
+
+
+
+function getChars(){
+  $('#contacts').load('{% if customer %}{% url "chat_list_customer" %}{% else %}{% url "chat_list" %}{% endif %}'), function(data) {
+    $("#contacts").animate({ scrollTop: 20000 }, "fast");
+  }
+}
+
+
+
+function getLastMessage(){
+
+    $.getJSON('{% url "last_message" %}', function( data ) {
+      if(data.last_message_id) {
+        if (data.last_message_id != last_messageall_id) { 
+            last_messageall_id = data.last_message_id;
+            getChars();
+        }
+      }
+
+    });
+  clearInterval(hasNewChatsTimer);
+  hasNewChatsTimer = setInterval(function() {
+    getLastMessage();
+  }, 2000);
+
+}
+
+    {% if not has_filter %}
+
+hasNewChatsTimer = setInterval(function() {
+  getLastMessage();
+}, 2000);
+
+  {% endif %}
+
+</script>
+
+

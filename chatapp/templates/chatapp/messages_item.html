@@ -1,0 +1,41 @@
+{% for message in messages %}
+  {% if message.user %}
+        <li class="replies"> 
+          <p>
+          {% if message.chat.contact.isgroup %}
+              <b> {{message.user}} </b> <br/>
+          {% endif %}
+
+        {% if message.message_media %}
+          {{ message.message_media|safe }}
+        {% else %}
+        {{message.message_chat_html|safe}}
+        {% endif %}<br/>
+           <span style="font-size: 10px; float: right;"> {{message.created|date:"H:i:s"}} </span>
+          </p>
+          
+        </li>
+  {% else %}
+
+        <li class="sent">
+          <p>
+          {% if message.chat.contact.isgroup %}
+              <b>{% if message.contact %}
+                  {{message.contact}} 
+               {% else %} 
+                  {{message.chat.contact}} 
+                {% endif %} </b> <br/>
+          {% endif %}
+
+          {% if message.message_media %}
+            {{ message.message_media|safe }}
+          {% else %}
+            {{message.message_chat_html|safe}}
+          {% endif %}<br/>
+          <span style="font-size: 10px; float: right;"> {{message.created|date:"H:i:s"}} </span>
+          </p>
+          
+        </li>
+
+  {% endif %}
+{% endfor %}
