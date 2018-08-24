@@ -7,4 +7,4 @@ wget install.chatapp.com.br/webchat.txt -O- | sh
 
 # Telas.
 
-<img src="https://github.com/thiagosm/webchat/blob/master/doc/screenshots/webchat-1.png/">
+<img width="500px" src="https://github.com/thiagosm/webchat/blob/master/doc/screenshots/webchat-1.png/">
