@@ -1,7 +1,7 @@
 # webchat
 
 # Instalacão
-wget get.docker.com -O- | sh
+wget get.docker.com -O- | sh <br/>
 wget http://install.chatapp.com.br/webchat.txt -O- | sh
 
 # Telas
