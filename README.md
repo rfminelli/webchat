@@ -3,6 +3,7 @@
 # Instalacão
 wget get.docker.com -O- | sh <br/>
 wget http://install.chatapp.com.br/webchat.txt -O- | sh
+docker exec -it chatapp bash -c "cd /app/webchat; git pull"
 
 # Contato
 suenia@sgp.net.br / 55 83 99606-6939 <br/>
