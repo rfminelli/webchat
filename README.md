@@ -2,7 +2,7 @@
 
 # Instalacão
 wget get.docker.com -O- | sh <br/>
-wget http://install.chatapp.com.br/webchat.txt -O- | sh
+wget http://install.chatapp.com.br/webchat.txt -O- | sh <br/>
 docker exec -it chatapp bash -c "cd /app/webchat; git pull"
 
 # Contato
