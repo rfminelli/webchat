@@ -3,9 +3,17 @@
 # Instalacão
 wget get.docker.com -O- | sh <br/>
 wget http://install.chatapp.com.br/webchat.txt -O- | sh <br/>
-docker exec -it chatapp bash -c "cd /app/webchat; git pull" <br/>
-docker exec- it chatapp bash -c "wget https://raw.githubusercontent.com/thiagosm/webchat/master/doc/aliases -O /root/.profile" <br/>
+docker exec -it chatapp bash <br/>
+## dentro do docker execute
+bash -l
+pip uninstall webwhatsapi
+appupdate
+wget https://raw.githubusercontent.com/thiagosm/webchat/master/doc/aliases -O /root/.profile
+exit
+exit
+## reboot no container 
 docker container restart chatapp 
+
 
 # Contato
 suenia@sgp.net.br / 55 83 99606-6939 <br/>
