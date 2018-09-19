@@ -5,12 +5,12 @@ wget get.docker.com -O- | sh <br/>
 wget http://install.chatapp.com.br/webchat.txt -O- | sh <br/>
 docker exec -it chatapp bash <br/>
 ## dentro do docker execute
-bash -l
-pip uninstall webwhatsapi
-appupdate
-wget https://raw.githubusercontent.com/thiagosm/webchat/master/doc/aliases -O /root/.profile
-exit
-exit
+bash -l <br/>
+pip uninstall webwhatsapi <br/>
+appupdate <br/>
+wget https://raw.githubusercontent.com/thiagosm/webchat/master/doc/aliases -O /root/.profile <br/>
+exit <br/>
+exit <br/>
 ## reboot no container 
 docker container restart chatapp 
 
