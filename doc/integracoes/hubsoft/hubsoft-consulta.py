@@ -26,11 +26,6 @@ class WebService:
         response['customer'] = response['nome_razaosocial']
         response['doc'] = response['cpf_cnpj']
 
-        if kwargs.get('next_ws'):
-            response['TOKEN'] = self.TOKEN
-            response['WS_HOST'] = self.WS_HOST
-            response['APP'] = self.APP
-
         return response
 
     def run(self,q,**kwargs):
