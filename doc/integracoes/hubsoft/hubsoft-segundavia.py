@@ -15,32 +15,22 @@ class WebService:
         self.password = 'api123api'
         self.url = 'https://api.dev.hubsoft.com.br'
         self.urlOauth = '%s/oauth/token' %self.url
-        self.urlCliente = '%s/api/v1/integracao/cliente?busca=cpf_cnpj&termo_busca=' %self.url
-
-    def responseContrato(self,rws,**kwargs):
-        response = {}
-        response['codigo_cliente'] = str(rws.get('codigo_cliente'))
-        response['nome_razaosocial'] = str(rws.get('nome_razaosocial'))
-        response['cpf_cnpj'] = str(rws.get('cpf_cnpj'))
-        response['message'] = u'Olá %s, seja bem-vindo ao autoatendimento. Seguem as opções.' %response['nome_razaosocial']
-        response['customer'] = response['nome_razaosocial']
-        response['doc'] = response['cpf_cnpj']
-
-        if kwargs.get('next_ws'):
-            response['TOKEN'] = self.TOKEN
-            response['WS_HOST'] = self.WS_HOST
-            response['APP'] = self.APP
-
-        return response
+        self.urlCliente = '%s/api/v1/integracao/cliente/financeiro?busca=codigo_cliente&termo_busca=' %self.url
 
     def run(self,q,**kwargs):
 
         reload(sys)
         sys.setdefaultencoding('utf-8')
 
-        query = re.sub('[^0-9 ]','',' '.join(q.strip().split()))
+        data_json = {}
+        try:
+            data = kwargs.get('data')
+            data_json = json.loads(data)
+        except:
+            pass
 
-        if query:
+        if data_json.get('codigo_cliente'):
+
             requestBody = {}
             requestBody['client_id'] = self.clientId
             requestBody['client_secret'] = self.clientSecret
@@ -52,27 +42,28 @@ class WebService:
             if self.token:
                 headers = {'Authorization': self.token}
 
-
-
             r = requests.post(self.urlOauth,headers=headers,json=requestBody)
             if r.status_code == 200:
                 tokenType = r.json().get('token_type')
                 accessToken = r.json().get('access_token')
                 authorizationToken = '%s %s' %(tokenType,accessToken)
-                reqCliente = requests.get('%s%s'%(self.urlCliente,query),
+                reqCliente = requests.get('%s%s'%(self.urlCliente,data_json.get('codigo_cliente')),
                                                   headers={'Authorization': authorizationToken})
                 if reqCliente.status_code == 200:
                     rws = reqCliente.json()
-                    if rws.get('clientes'):
-                        return self.responseContrato(rws.get('clientes')[0])
+                    resposta = ""
+                    if rws.get('faturas'):                        
+                        for i in rws.get('faturas'):
+                            resposta += '\nFatura %s Venc. Original: %s Valor: %s' %(i.get('id_fatura'),
+                                                                                     i.get('valor'))
+                            if i.get('link'):
+                                resposta += '\nLink do Boleto: %s' %(i.get('link'))
+                                
                     else:
-                        return {'message': 'Não localizamos o cliente com as informações'}
-                else:
-                    return {'message': 'Falha na integração. '}
-            else:
-                return {'message': 'Falha na integração. '}
+                        resposta += u'\nNão localizamos fatura em aberto para envio do link'
+                    return {'message': resposta}
+            return {'message': 'Erro no processamento. Favor identifique-se novamente digitando a opção #ajuda'}
+        else:
+            return {'message': 'Erro no processamento. Favor identifique-se novamente digitando a opção #ajuda'}
 
-        return {'message': 'Digite CPF/CNPJ do Assinante'}
 
-#s = WebService()
-#s.run('09141806654')
