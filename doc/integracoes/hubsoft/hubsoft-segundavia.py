@@ -58,12 +58,12 @@ class WebService:
                                                                                      i.get('data_vencimento'),
                                                                                      i.get('valor'))
                             if i.get('link'):
-                                resposta += '\nLink do Boleto: %s' %(i.get('link'))
+                                resposta += ' Link do Boleto: %s' %(i.get('link'))
                                 
                     else:
                         resposta += u'\nNão localizamos fatura em aberto para envio do link'
                     return {'message': resposta}
-        
+
         return {'message': 'Erro no processamento. Favor identifique-se novamente digitando a opção #ajuda'}
 
 
