@@ -55,6 +55,7 @@ class WebService:
                     if rws.get('faturas'):                        
                         for i in rws.get('faturas'):
                             resposta += '\nFatura %s Venc. Original: %s Valor: %s' %(i.get('id_fatura'),
+                                                                                     i.get('data_vencimento'),
                                                                                      i.get('valor'))
                             if i.get('link'):
                                 resposta += '\nLink do Boleto: %s' %(i.get('link'))
@@ -62,8 +63,7 @@ class WebService:
                     else:
                         resposta += u'\nNão localizamos fatura em aberto para envio do link'
                     return {'message': resposta}
-            return {'message': 'Erro no processamento. Favor identifique-se novamente digitando a opção #ajuda'}
-        else:
-            return {'message': 'Erro no processamento. Favor identifique-se novamente digitando a opção #ajuda'}
+        
+        return {'message': 'Erro no processamento. Favor identifique-se novamente digitando a opção #ajuda'}
 
 
