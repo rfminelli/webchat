@@ -1,0 +1,25 @@
+Django==1.11.16
+django-jet
+psycopg2-binary
+mysqlclient
+requests
+typing
+numpy
+fbchat
+lxml
+python-magic
+django-import-export
+djangorestframework == 3.5.3
+django-admin-rangefilter
+xmltodict
+XlsxWriter
+xlwt
+xlrd
+qrcode
+python-docx
+gunicorn
+futures
+mechanize
+html5lib==1.0b10
+firebase-admin
+google-cloud-firestore
