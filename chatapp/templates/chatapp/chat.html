@@ -1,23 +1,9 @@
 {% load i18n %}
-<div class="contact-profile">
-  {% if chat.contact.profile_pic %}
-    <img src="{{chat.contact.profile_pic}}" alt="{{chat.contact}}" />
-  {% endif %}
-  <p>{{chat.contact}}</p>
+<div class="opts" style="display: none;">
   {% if chat.owner %}
   <button type="button" style="padding-bottom: 0px; padding-top: 0px;" class="btn btn-outline-info btn-sm">{{chat.owner.username}} </button>
   {% endif %}
-  
-
-<div class="clip-upload" style="float: right; padding-right: 10px;">
-   <label for="file-input">
-    <i class="fa fa-paperclip fa-lg fa-2x" aria-hidden="true"></i>
-   </label>
-   <input type="file" name="file-input" id="file-input">
-  </div>
-
-
-      {% if not chat.owner %} 
+  {% if not chat.owner %} 
    <button type="button" class="btn btn-outline-success btn-sm" onclick="chatAction('{% url "chat_start" chat.id %}');">{% trans "Iniciar atendimento" %}</button>
    {% endif %}
 
@@ -27,8 +13,8 @@
 
       {% if chat.owner == user %}
       <button type="button" class="btn btn-outline-danger btn-sm" onclick="chatAction('{% url "chat_stop" chat.id %}');">{% trans "Finalizar atendimento" %}</button>
-      {% endif %}
-      {% endif %}
+    {% endif %}
+  {% endif %}
 
   
     {% if chat.owner == user or user.is_superuser %}
@@ -55,15 +41,12 @@
 </div>
 
 
-<div class="messages">
-  <ul>
-
-  </ul>
+<div class="msgs">
+  
 </div>
 
 
 <script >
-
 $('#usermsg').focus();
 
 $("#profile-img").click(function() {
@@ -106,9 +89,8 @@ last_message_id='{{last_message_id}}';
 {% endif %}
 
 $.get('{% url "chat_messages" chat.id %}',function(data,status){
-  $(data).appendTo($('.messages ul'));
+  $(data).appendTo($('.msgs'));
 });
-$(".messages").animate({ scrollTop: 20000 }, "fast");
 
 clearInterval(hasNewMessagesTimer);
 
@@ -127,7 +109,7 @@ function getMessages(){
       if(data.has_new_message) {
         last_message_id = data.last_message_id;
         $.get('{% url "chat_messages" chat.id %}/?messageid='+last_message_id,function(m,status){
-          $(m).appendTo($('.messages ul'));
+          $(m).appendTo($('.msgs'));
           $(".messages").animate({ scrollTop: 20000 }, "fast");
         });
       }
@@ -148,61 +130,36 @@ hasNewMessagesTimer = setInterval(function() {
 
 
 
-function newMessage() {
-  message = $(".message-input textarea").val();
-  if($.trim(message) == '') {
-    return false;
-  }
-
+newMessage = function(message) {
   var dataform = $("#messageform").serialize();
   $.post('{% url "chat_message_add" chat.id %}', dataform,function(data,status){
     last_message_id = data.messageid;
     $.get('{% url "chat_messages" chat.id %}?messageid='+data.messageid,function(d,status){
-      $(d).appendTo($('.messages ul'));
+      $(d).appendTo($('.msgs'));
     });
   });
 
-$('.message-input textarea').val(null);
-$('.contact.active .preview').html('<span>You: </span>' + message);
+$('.conversa.selecionada .dados .ultima-mensagem').html('<b>Você: </b>' + message);
 $(".messages").animate({ scrollTop: 20000 }, "fast");
 };
 
-$('.submit').click(function() {
-  newMessage();
-});
-
-$(window).on('keydown', function(e) {
-  if (e.which === 13 && !e.shiftKey) {
-    newMessage();
-    return false;
-  }
-});
-
-</script>
 
 {% if not chat.owner %}
-  
- Clique em iniciar atendimento.
 
+  $("#mensagem-input").addClass("disabled");
+  distroyUploader();
 
 {% else %}
-
   {% if chat.owner == user %}
-    <form id="messageform" name="messageform" method="post" action="">
-    {% csrf_token %}
-    <div class="message-input">
-      <div class="wrap">
-      <input type="hidden" name="appendhtml" value='yes'/>
-      <textarea type="text" id="usermsg" name="usermsg" placeholder="Digite sua mensagem..."></textarea>
-      <i class="fa fa-microphone fa-2x" style="padding-top: 10px; padding-left: 5px;"></i>
-      </div>
-    </div>
-    </form>
+      $("#mensagem-input").removeClass("disabled");
+      createUploader("{% csrf_token %}");
     {% else %}
-      <h2> {% trans "Chat Pertence a outro usuário" %} </h2>
+      $("#mensagem-input").addClass("disabled");
+      distroyUploader();x
     {% endif %}
 
   {% endif %}
+</script>
 
 
 

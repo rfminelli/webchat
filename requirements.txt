@@ -1,11 +1,12 @@
 Django==1.11.16
-django-jet
 psycopg2-binary
 mysqlclient
 requests
 typing
 numpy
 fbchat
+git+https://github.com/mukulhase/WebWhatsapp-Wrapper.git
+git+https://github.com/thiagosm/cep.git
 lxml
 python-magic
 django-import-export
@@ -23,3 +24,4 @@ mechanize
 html5lib==1.0b10
 firebase-admin
 google-cloud-firestore
+vobject
