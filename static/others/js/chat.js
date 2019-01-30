@@ -123,8 +123,10 @@ distroyUploader = function(){
 
 
 $(document).ready(function(){
-
-	$(document).on('drop', function(e) {
+	$(document).on('dragenter dragover', function(e) {
+			e.preventDefault();
+	});
+	$(document).on('dragdrop drop', function(e) {
 		if (e.target.id != "file-janela-modal"){
 			alert("Inicie o atendimento");
 			e.preventDefault();
