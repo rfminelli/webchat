@@ -91,14 +91,6 @@ createUploader = function(csrf){
 			$("#filemodal").removeClass("escondido");
 		});
 
-		$(document).on('drop', function(e) {
-  			if (e.target.id != "file-janela-modal"){
-        		alert("Inicie o atendimento");
-	        	e.preventDefault();
-        		return false;
-        	}
-        	return true;
-	    });
 
 		uploader.on("queuecomplete ", function(){
 			$("#enviarArquivos").removeAttr("disabled");
@@ -131,6 +123,16 @@ distroyUploader = function(){
 
 
 $(document).ready(function(){
+
+	$(document).on('drop', function(e) {
+		if (e.target.id != "file-janela-modal"){
+			alert("Inicie o atendimento");
+			e.preventDefault();
+			return false;
+		}
+		return true;
+	});
+	
    if (Recorder.isRecordingSupported()) {
       $("#mic").removeClass("invalido");
     }
