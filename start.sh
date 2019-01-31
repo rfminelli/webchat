@@ -11,5 +11,5 @@ export VNCPASSWORD=GQQMBP3NLYWBL6CQHY2Y
 export PATH=/opt/webchat/bin:$PATH
 
 /usr/bin/awesome&
-#/usr/bin/xterm -e "/opt/webchat/python/bin/python manage.pyc whatsapp"&
-#/usr/bin/xterm -e "/opt/webchat/python/bin/python manage.pyc facebook"&
+/usr/bin/xterm -e "/opt/webchat/python/bin/python manage.pyc whatsapp"&
+/usr/bin/xterm -e "/opt/webchat/python/bin/python manage.pyc facebook"&
