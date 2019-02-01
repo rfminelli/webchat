@@ -10,6 +10,6 @@ export DISPLAY_HEIGHT=768
 export VNCPASSWORD=GQQMBP3NLYWBL6CQHY2Y
 export PATH=/opt/webchat/bin:$PATH
 
-screen -R -S webchat -X /usr/bin/awesome&
+screen -d -m bash -c /usr/bin/awesome&
 /usr/bin/xterm -e "/opt/webchat/python/bin/python manage.pyc whatsapp"&
 /usr/bin/xterm -e "/opt/webchat/python/bin/python manage.pyc facebook"&
