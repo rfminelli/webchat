@@ -1,8 +1,8 @@
 ####################### Primeiro Passo
-apt-get install -y wget ca-certificates git sqlite bash python python-dev libmariadb-dev libpq-dev build-essential gcc g++ xvfb x11vnc awesome supervisor python-setuptools xterm libmagic-dev libev-dev libgcrypt20-dev libxml2-dev libxslt1-dev libffi-dev fontconfig ttf-freefont cython mariadb-client postgresql-client libmariadbclient-dev libgtk-3-dev libdbus-glib-1-2 screen locales-all
+apt-get install -y wget ca-certificates git sqlite bash python python-dev libmariadb-dev libpq-dev build-essential gcc g++ xvfb x11vnc awesome supervisor python-setuptools xterm libmagic-dev libev-dev libgcrypt20-dev libxml2-dev libxslt1-dev libffi-dev fontconfig ttf-freefont cython mariadb-client postgresql-client libmariadbclient-dev libgtk-3-dev libdbus-glib-1-2 screen locales-all at
 
 #if ubuntu
-#apt-get install -y wget ca-certificates git sqlite bash python python-dev libmysqld-dev libpq-dev build-essential xvfb x11vnc awesome supervisor python-setuptools xterm libmagic-dev libev-dev libgcrypt20-dev libxml2-dev libxslt1-dev libffi-dev fontconfig fonts-freefont-ttf cython mariadb-client postgresql-client libmysqlclient-dev libgtk-3-dev libdbus-glib-1-2 python-pip
+#apt-get install -y wget ca-certificates git sqlite bash python python-dev libmysqld-dev libpq-dev build-essential xvfb x11vnc awesome supervisor python-setuptools xterm libmagic-dev libev-dev libgcrypt20-dev libxml2-dev libxslt1-dev libffi-dev fontconfig fonts-freefont-ttf cython mariadb-client postgresql-client libmysqlclient-dev libgtk-3-dev libdbus-glib-1-2 python-pip at
 
 ###################### Segundo Passo
 systemctl enable supervisor
