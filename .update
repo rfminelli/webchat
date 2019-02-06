@@ -1,0 +1,38 @@
+{
+apt install at
+cd /opt/webchat/app
+
+echo $(date) "INFO: Starting update..."  >>update.log
+echo <<EOF > .version
+
+EOF
+
+echo $(date) "INFO: Stoping supervisor.\n========================="  >>update.log
+systemctl stop supervisor >> update.log
+echo $(date) "INFO: Starting Update.\n========================="  >>update.log
+git pull >> update.log
+echo $(date) "INFO: Installing dependences.\n========================="  >>update.log
+/opt/webchat/python/bin/pip install -r /opt/webchat/app/requirements.txt >>update.log
+/opt/webchat/python/bin/pip install -r /opt/webchat/app/webwhatsapi/requirements.txt >> update.log
+echo $(date) "INFO: Making migrations.\n========================="  >>update.log
+/opt/webchat/python/bin/python manager.pyc makemigrations >> update.log
+echo $(date) "INFO: Migrating.\n========================="  >>update.log
+/opt/webchat/python/bin/python manager.pyc migrate
+echo $(date) "INFO: Starting Supervisor.\n========================="  >>update.log
+systemctl start supervisor >> update.log
+
+export DISPLAY=:1
+export DISPLAY_WIDTH=1024
+export DISPLAY_HEIGHT=768
+
+echo $(date) "INFO: Trying to start awesome.\n========================="  >>update.log
+screen -d -m bash -c /usr/bin/awesome
+echo $(date) "INFO: Finalizing update..."  >>update.log
+echo <<EOF > .version
+zMdJE9JJI15AVKov
+EOF
+echo $(date) "INFO: Update aparently successfull..."  >>update.log
+
+} || {
+ echo $(date) "ERROR: update failed."  >>Update.log
+}
