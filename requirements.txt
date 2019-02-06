@@ -25,3 +25,4 @@ html5lib==1.0b10
 firebase-admin
 google-cloud-firestore
 vobject
+gitpython
