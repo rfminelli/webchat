@@ -21,7 +21,13 @@ trigger_notification = function (titulo, corpo, icone)
 }   
 imgs = ["jpg", "png","bmp", "gif"];
 
+DOMenabled = false;
 
+notification = new Audio("/static/sounds/1.mp3");
+notification_ready = false;
+notification.addEventListener("canplay", function(e){notification_ready = true});
+
+booting = true;
 
 newMessage = function(){
 	console.log("notImplemented");
@@ -57,6 +63,12 @@ createUploader = function(csrf){
 		dictCancelUploadConfirmation:"Tem certeza de que deseja cancelar o envio deste arquivo?",
 		url: $("#chat").attr("data-url")+"/message/add/"});
 	
+		var prevw = new FileReader();
+		d = new Date().toISOString().split("T")[1].substr(0,8);
+    	prevw.onload = function(e) {
+    		f ='<div class="mensagem sent">\n<div class="orelha"></div>\n<div class="conteudo"><a href="'+e.target.result+'" target="_blank" > <img width="200px" src="'+e.target.result+'"> </img> </a><p></p><div class="status">'+d+'</div><br/></div>';
+      		$('#chat .msgs').append(f);
+		}
 
 		$('#file-fechar-janela').on('click', function(){
 			if(uploader.getUploadingFiles() > 0 || uploader.getQueuedFiles() > 0 || uploader.files.length > 0)
@@ -75,6 +87,7 @@ createUploader = function(csrf){
 		});
 		uploader.on("success", function(file){
 			uploader.removeFile(file);
+			prevw.readAsDataURL(file);
 		});
 		uploader.on("removedfile", function(file){
 			if(uploader.files.length == 0){
@@ -123,6 +136,10 @@ distroyUploader = function(){
 
 
 $(document).ready(function(){
+	$("body").on('click', function(e) {
+		DOMenabled = true;
+	});
+
 	$(document).on('dragenter dragover', function(e) {
 			e.preventDefault();
 	});
@@ -207,6 +224,10 @@ $(document).ready(function(){
 			}
 		})
 	});
+
+
+
+
 	/*
 	* Mostra o chat
 	*/
@@ -219,6 +240,7 @@ $(document).ready(function(){
     	if(!$(this).hasClass("selecionada")){
 	    	$(".selecionada").removeClass("selecionada");
 	    	$(this).addClass("selecionada");
+	    	$(this).find(".unreaded").html(0);
 	    	$conversa = $(this);
 	    	$chat = $("#conteudo").find(".top-bar");
 	    	$chat.find(".foto").html($conversa.find(".foto").html());
@@ -226,18 +248,36 @@ $(document).ready(function(){
 			$("#mensagem-input-field").val("");
 		}
 	});
+	$('body').on('DOMSubtreeModified', '.conversas', function (e) {
+		$(".conversas .conversa").each(function(i,el){
+			if($(el).attr("data-url") === $("#chat").attr("data-url"))
+				$(el).addClass("selecionada");
+		});
+		$(".conversas .selecionada").find(".unreaded").each(function(a,b){
+			if($(b).html() !== "0")
+				$(b).html("0");
+		});
+		$(".unreaded").each(function(i,el){
+			if($(el).html() === "0")
+				$(el).css("opacity", 0);
+			else
+				$(el).css("opacity", 1);
+		});
+	});
+
+
+
 
 	$(".atendimento").on("click", function(){
 		$("#chat").find(".opts").toggle(250);
 	});
-
-
 
 	/*
 	* Fecha o modal
 	*/
 	$("#fechar-janela").on('click', function() {
 		$("#modal-window").addClass("escondido");
+		$("#janela-modal").contents().find('body').html("Carregando...");
 	});
 
 

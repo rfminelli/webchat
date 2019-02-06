@@ -139,8 +139,11 @@ newMessage = function(message) {
     });
   });
 
-$('.conversa.selecionada .dados .ultima-mensagem').html('<b>Você: </b>' + message);
-$(".messages").animate({ scrollTop: 20000 }, "fast");
+  if (!document.hasFocus()) {
+      trigger_notification($('.conversa.selecionada .dados .nome').html(), message, $('.conversa.selecionada .foto img').attr("src"));
+   }
+  $('.conversa.selecionada .dados .ultima-mensagem').html('<b>Você: </b>' + message);
+  $(".messages").animate({ scrollTop: 20000 }, "fast");
 };
 
 
@@ -159,6 +162,7 @@ $(".messages").animate({ scrollTop: 20000 }, "fast");
     {% endif %}
 
   {% endif %}
+
 </script>
 
 

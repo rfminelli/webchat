@@ -1,7 +1,8 @@
 {% load i18n %}
 
+  
   {% for chat in object_list %}
-        <div class="conversa" data-url="{% url "chat_view" chat.id %}">
+      <div class="conversa" data-url="{% url "chat_view" chat.id %}">
           <div class="foto">
             {% if chat.contact.profile_pic %}
               <img src="{{chat.contact.profile_pic}}" alt="{{chat.contact}}" />
@@ -11,6 +12,7 @@
             <div class="nome">
               {{chat.contact|truncatechars:20}}
             </div>
+                  <div class="unreaded">{{ chat.unreaded }}</div>
             {% if chat.contact.ctype == 'whatsapp' %}
                   <div class="app ion-logo-whatsapp"></div>
             {% endif %}
@@ -37,9 +39,16 @@ var hasNewChatsTimer;
 var last_messageall_id;
 clearInterval(hasNewChatsTimer);
 
+if(booting){
+  booting = false;
+}
+else if (notification_ready && DOMenabled && !document.hasFocus()){
+    notification.play();
+    trigger_notification("Webchat", "Novas Mensagen", "");
+}
 
 
-function getChars(){
+var getChars = function() {
   $('.conversas').load('{% if customer %}{% url "chat_list_customer" %}{% else %}{% url "chat_list" %}{% endif %}'), function(data) {
   }
 }

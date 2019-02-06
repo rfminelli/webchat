@@ -137,7 +137,22 @@ html,body,#all{
 	overflow:hidden;
 	display: inline-block;
 	max-height: 50%;
-	width: calc(100% - 25px);
+	width: calc(100% - 60px);
+}#sidebar .conversa .dados .unreaded{
+    overflow: hidden;
+    display: inline-block;
+    width: 25px;
+    font-size: 0.65em;
+    height: 25px;
+    border-radius: 82%;
+    line-height: 25px;
+    font-weight: bolder;
+    text-align: center;
+    background: #10c520;
+    color: white;
+}
+#sidebar .conversa.selecionada .dados .unreaded{
+    opacity: 0;
 }
 #sidebar .conversa .dados .app{
 	overflow:hidden;
@@ -377,11 +392,23 @@ html,body,#all{
     text-align: right;
 }
 #chat .mensagem .conteudo br{
-	display: none;
+	/*display: none;*/
 }
 #chat .mensagem .conteudo .user{
 	display: block;
 }
+#chat .call_log{
+	text-align: center;
+}
+#chat .call_log span{
+    font-size: 0.7em;
+    background: #c2809d;
+    border-radius: 5px;
+    padding: 3px;
+    color: snow;
+    font-weight: bolder;
+}
+
 #chat .mensagem .conteudo {
 	max-width: 400px;
 	min-width: 100px;
