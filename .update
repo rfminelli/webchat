@@ -15,9 +15,9 @@ echo $(date) "INFO: Installing dependences.\n========================="  >>updat
 /opt/webchat/python/bin/pip install -r /opt/webchat/app/requirements.txt >>update.log
 /opt/webchat/python/bin/pip install -r /opt/webchat/app/webwhatsapi/requirements.txt >> update.log
 echo $(date) "INFO: Making migrations.\n========================="  >>update.log
-/opt/webchat/python/bin/python manager.pyc makemigrations >> update.log
+/opt/webchat/python/bin/python manage.pyc makemigrations >> update.log
 echo $(date) "INFO: Migrating.\n========================="  >>update.log
-/opt/webchat/python/bin/python manager.pyc migrate
+/opt/webchat/python/bin/python manage.pyc migrate
 echo $(date) "INFO: Starting Supervisor.\n========================="  >>update.log
 systemctl start supervisor >> update.log
 
