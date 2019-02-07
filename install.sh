@@ -124,8 +124,8 @@ sed -i -- "s/8059/$VNCPORT/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.htm
 cd /opt/webchat/app/
 chmod +x facebook
 chmod +x whatsapp
-cp facebook /usr/bin/
-cp whatsapp /usr/bin/
+ln -s facebook /usr/bin/
+ln -s whatsapp /usr/bin/
 chmod +x /opt/webchat/app/.update
 systemctl start supervisor
 
