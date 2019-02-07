@@ -42,7 +42,7 @@ $(date) "INFO: Running postscript..."  >> update.log
 $(date) "WARNING: Postscript didn't run, is it empty?"  >> update.log
 }
 
-chmod +x /opt/webchat/app.update
+chmod +x /opt/webchat/app/.update
 cat <<EOF > .version
 zMdJE9JJI15AVKov
 EOF
