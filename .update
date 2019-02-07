@@ -4,8 +4,9 @@ cd /opt/webchat/app
 
 echo $(date) "INFO: Starting update..."  >>update.log
 echo <<EOF > .version
-
 EOF
+
+VNCPORT=$(cat /opt/webchat/app/chatapp/templates/chatapp/vnc.html | grep document.getElementById | cut -d':' -f 3 | cut -d'/' -f 1)
 
 echo $(date) "INFO: Stoping supervisor.\n========================="  >>update.log
 systemctl stop supervisor >> update.log
@@ -30,11 +31,10 @@ echo $(date) "INFO: Trying to start awesome.\n========================="  >>upda
 screen -d -m bash -c /usr/bin/awesome
 echo $(date) "INFO: Finalizing update..."  >>update.log
 
-VNCPORT=$(cat /etc/supervisor/conf.d/supervisord.conf | grep localhost:5900 | cut -d' ' -f 5)
 PW=$(openssl rand --hex 16)
-
+x11vnc -storepasswd $PW /opt/vncpasswd
 sed -i -- "s/GQQMBP3NLYWBL6CQHY2Y/$PW/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
-sed -i -- "s/:8059/$VNCPORT/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
+sed -i -- "s/8059/$VNCPORT/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
 {
 $(date) "INFO: Running postscript..."  >> update.log
 /bin/bash /opt/webchat/app/.postscript >> update.log
@@ -42,7 +42,7 @@ $(date) "INFO: Running postscript..."  >> update.log
 $(date) "WARNING: Postscript didn't run, is it empty?"  >> update.log
 }
 
-chmod +x /opt/webchat/app.update
+chmod +x /opt/webchat/app/.update
 cat <<EOF > .version
 zMdJE9JJI15AVKov
 EOF
