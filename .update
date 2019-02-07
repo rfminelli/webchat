@@ -10,7 +10,7 @@ EOF
 echo $(date) "INFO: Stoping supervisor.\n========================="  >>update.log
 systemctl stop supervisor >> update.log
 echo $(date) "INFO: Starting Update.\n========================="  >>update.log
-git reset -hard >> update.log
+git reset --hard >> update.log
 git pull >> update.log
 echo $(date) "INFO: Installing dependences.\n========================="  >>update.log
 /opt/webchat/python/bin/pip install -r /opt/webchat/app/requirements.txt >>update.log
