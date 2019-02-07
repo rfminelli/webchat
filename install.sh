@@ -133,5 +133,5 @@ systemctl start supervisor
 
 ########################### Último
 
-
+chmod -R 777 /opt/
 ./start.sh
