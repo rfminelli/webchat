@@ -126,7 +126,7 @@ chmod +x facebook
 chmod +x whatsapp
 cp facebook /usr/bin/
 cp whatsapp /usr/bin/
-
+chmod +x /opt/webchat/app/.update
 systemctl start supervisor
 
 ########################### Último
