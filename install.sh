@@ -40,12 +40,12 @@ PATH=/opt/webchat/bin:$PATH
 EOF
 
 source /etc/environment
-
+PW=$(openssl rand --hex 16)
 # noVNC
 git clone https://github.com/kanaka/noVNC.git /opt/noVNC
 git clone https://github.com/kanaka/websockify /opt/noVNC/utils/websockify
 ln -s /opt/noVNC/vnc.html /opt/noVNC/index.html
-x11vnc -storepasswd $VNCPASSWORD /opt/vncpasswd
+x11vnc -storepasswd $PW /opt/vncpasswd
 
 # geckodriver
 wget https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux64.tar.gz -O /tmp/geckodriver.tar.gz
@@ -121,7 +121,7 @@ chmod +x facebook
 chmod +x whatsapp
 cp facebook /usr/bin/
 cp whatsapp /usr/bin/
- sed -i -- "s/{{vncpassword}}/GQQMBP3NLYWBL6CQHY2Y/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
+sed -i -- "s/GQQMBP3NLYWBL6CQHY2Y/$PW/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
 
 
 systemctl start supervisor
