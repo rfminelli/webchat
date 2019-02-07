@@ -33,7 +33,7 @@ screen -d -m bash -c /usr/bin/awesome
 echo $(date) "INFO: Finalizing update..."  >>update.log
 VNVS2=$(md5sum /opt/webchat/app/chatapp/templates/chatapp/vnc.html)
 
-if [$VNVS -ne $VNVS2] then
+if [ $VNVS -ne $VNVS2 ]; then
   PW=$(openssl rand --hex 16)
   x11vnc -storepasswd $PW /opt/vncpasswd
   sed -i -- "s/GQQMBP3NLYWBL6CQHY2Y/$PW/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
