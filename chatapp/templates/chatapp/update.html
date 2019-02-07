@@ -92,6 +92,7 @@ button:hover:disabled {
 </style>
 {% if updating %}
 	<p class="atualizando">Atualizando o WebChat, aguarde um instante...</p>
+	<p class="atualizando">{{updating}}</p>
 <script type="text/javascript">
 	setTimeout(5*60*1000, function(){
 		$(".changelog").load("/chat/update");
