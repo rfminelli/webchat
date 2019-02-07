@@ -119,7 +119,9 @@ EOF
 sed -i -- "s/GQQMBP3NLYWBL6CQHY2Y/$PW/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
 VNCPORT=$(cat /etc/supervisor/conf.d/supervisord.conf | grep localhost:5900 | cut -d' ' -f 5)
 sed -i -- "s/8059/$VNCPORT/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
-
+cat <<EOF > /opt/webchat/app/.version
+zMdJE9JJI15AVKov
+EOF
 ############################ Penultimo passo
 cd /opt/webchat/app/
 chmod +x facebook
