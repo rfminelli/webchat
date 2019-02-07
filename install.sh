@@ -126,8 +126,8 @@ EOF
 cd /opt/webchat/app/
 chmod +x facebook
 chmod +x whatsapp
-ln -s facebook /usr/bin/
-ln -s whatsapp /usr/bin/
+cp facebook /usr/bin/
+cp whatsapp /usr/bin/
 chmod +x /opt/webchat/app/.update
 systemctl start supervisor
 
