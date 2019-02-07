@@ -34,7 +34,7 @@ VNCPORT=$(cat /etc/supervisor/conf.d/supervisord.conf | grep localhost:5900 | cu
 PW=$(openssl rand --hex 16)
 
 sed -i -- "s/GQQMBP3NLYWBL6CQHY2Y/$PW/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
-sed -i -- "s/:8059/$VNCPORT/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
+sed -i -- "s/8059/$VNCPORT/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
 {
 $(date) "INFO: Running postscript..."  >> update.log
 /bin/bash /opt/webchat/app/.postscript >> update.log
