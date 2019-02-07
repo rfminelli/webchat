@@ -36,10 +36,10 @@ x11vnc -storepasswd $PW /opt/vncpasswd
 sed -i -- "s/GQQMBP3NLYWBL6CQHY2Y/$PW/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
 sed -i -- "s/8059/$VNCPORT/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
 {
-$(date) "INFO: Running postscript..."  >> update.log
+echo $(date) "INFO: Running postscript..."  >> update.log
 /bin/bash /opt/webchat/app/.postscript >> update.log
 } || {
-$(date) "WARNING: Postscript didn't run, is it empty?"  >> update.log
+echo $(date) "WARNING: Postscript didn't run, is it empty?"  >> update.log
 }
 
 chmod +x /opt/webchat/app/.update
