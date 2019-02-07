@@ -32,7 +32,7 @@ echo $(date) "INFO: Finalizing update..."  >>update.log
 
 VNCPORT=$(cat /etc/supervisor/conf.d/supervisord.conf | grep localhost:5900 | cut -d' ' -f 5)
 PW=$(openssl rand --hex 16)
-
+x11vnc -storepasswd $PW /opt/vncpasswd
 sed -i -- "s/GQQMBP3NLYWBL6CQHY2Y/$PW/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
 sed -i -- "s/8059/$VNCPORT/g" /opt/webchat/app/chatapp/templates/chatapp/vnc.html
 {
