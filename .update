@@ -42,7 +42,8 @@ $(date) "INFO: Running postscript..."  >> update.log
 $(date) "WARNING: Postscript didn't run, is it empty?"  >> update.log
 }
 
-echo <<EOF > .version
+chmod +x /opt/webchat/app.update
+cat <<EOF > .version
 zMdJE9JJI15AVKov
 EOF
 echo $(date) "INFO: Update aparently successfull..."  >>update.log
