@@ -63,6 +63,24 @@ rm firefox-61.0.2.tar.bz2
 
 ############################### Quarto Passo
 
+while [ -n "$PROV" ]: do
+  read -p "Qual o nome do provedor? " $PROV
+done
+
+read -p "Digite 1, se deseja configurar integração com o sgp: " $INTEGRAR
+if [ $INTEGRAR = 1 ]: then
+  while [ -n "$PURL" ]: do
+    read -p "Qual a url do provedor (url completa sem a ultima barra)"? $PURL
+  done
+  while [ -n "$PTK" ]: do
+    read -p "Qual o token do sgp"? $PTK
+  done 
+  cp /opt/webchat/app/doc/integracoes/sgp/* /opt/webchat/scripts/
+  sed -i -- "s/TOKEN_AQUI/"$PTK"/g" /opt/webchat/app/scripts/
+  sed -i -- "s/http:\/\/10.10.10.10:8000/"$PURL"/g" /opt/webchat/app/scripts/
+fi
+
+
 # initial data
 cd /opt/webchat/app/
 mkdir data
