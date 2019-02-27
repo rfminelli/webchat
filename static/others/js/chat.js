@@ -130,12 +130,88 @@ createUploader = function(csrf){
 }
 
 distroyUploader = function(){
+	try{
 	uploader.disable();
+	}catch(a){
+
+	}
+}
+
+wpformat = function(strg){
+	return strg;
+	var filter_strikethrough = /(?:[\b >])([~])(.+?)([~])/g;
+	var filter_italic = /(?:[\b >])([_])(.+?)([_])/g;
+	var filter_bold = /(?:[\b >])([*])(.+?)([*])/g;
+	var match;
+
+	var control = false;
+	for(var i=0; i < strg.length; i++){
+		if(parseInt(strg.codePointAt(i)) >= 9000 ){
+			if(!control){
+				strg = strg.substr(0,i)+'<span class="emoji">'+strg.substr(i);
+				i+=21;
+				control = true;
+			}
+		}
+		else{
+			if(control){
+				strg = strg.substr(0,i)+'</span>'+strg.substr(i);
+				control = false;
+				i+=7;
+			}
+		}
+	}
+
+	while(match = filter_bold.exec(strg)){
+		var start = filter_bold.lastIndex - match[0].length;
+		var end = filter_bold.lastIndex-1;
+		console.log(match);
+
+		strg = strg.substr(0,start+1)+"<b>"+match[2] +"</b>"+strg.substr(end);
+	}
+
+	match = undefined;
+	while(match = filter_italic.exec(strg)){
+		var start = filter_italic.lastIndex - match[0] .length;
+		var end = filter_italic.lastIndex-1;    
+		strg = strg.substr(0,start+1)+"<i>"+match[2] +"</i>"+strg.substr(end);
+	}
+
+	match = undefined;
+	while(match = filter_strikethrough.exec(strg)){
+		var start = filter_strikethrough.lastIndex - match[0] .length;
+		var end = filter_strikethrough.lastIndex-1;    
+	    strg = strg.substr(0,start+1)+"<del>"+match[2] +"</del>"+strg.substr(end);
+	}
+	return strg;
 }
 
 
 
 $(document).ready(function(){
+	doEmoji = function(){
+		return;
+		$('.msgs').off('DOMNodeInserted');
+		$('.conversa .dados .ultima-mensagem').each(function(){
+			if($(this).find(".emoji").length == 0)
+				$(this).html(wpformat($(this).html()));
+		});
+		$(".mensagem").each(function(){
+			if($(this).find(".conteudo").find(".emoji").length == 0){
+				var text = $(this).find(".conteudo").html();
+				text = wpformat(text);
+				$(this).find(".conteudo").html(text);
+			}
+		});
+		$('.msgs').on('DOMNodeInserted', function(){
+			doEmoji();
+		});
+		$('.msgs').on('DOMNodeInserted', function(){
+			doEmoji();
+		});
+	}
+
+
 	$("body").on('click', function(e) {
 		DOMenabled = true;
 	});
@@ -235,7 +311,9 @@ $(document).ready(function(){
     	$("#conteudo").removeClass("escondido");
     	$("#sidebar").addClass("escondido");
 
-    	$('#chat').load($(this).attr("data-url"));
+    	$('#chat').load($(this).attr("data-url"), function(){
+    		doEmoji();
+    	});
     	$('#chat').attr("data-url", $(this).attr("data-url"));
     	if(!$(this).hasClass("selecionada")){
 	    	$(".selecionada").removeClass("selecionada");

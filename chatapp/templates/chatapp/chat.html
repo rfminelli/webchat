@@ -98,7 +98,7 @@ function chatAction(url) {
       $.getJSON(url, function( data ) {
       if(data.message) {
         alert(data.message);
-        window.location.reload();     
+        window.location.reload();
       }
     });
 }
@@ -142,7 +142,7 @@ newMessage = function(message) {
   if (!document.hasFocus()) {
       trigger_notification($('.conversa.selecionada .dados .nome').html(), message, $('.conversa.selecionada .foto img').attr("src"));
    }
-  $('.conversa.selecionada .dados .ultima-mensagem').html('<b>Você: </b>' + message);
+  $('.conversa.selecionada .dados .ultima-mensagem').html('<b>Você: </b>' +wpformat(wmessage));
   $(".messages").animate({ scrollTop: 20000 }, "fast");
 };
 
