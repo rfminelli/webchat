@@ -1,3 +1,4 @@
+#!/bin/bash
 {
 apt install at
 cd /opt/webchat/app
