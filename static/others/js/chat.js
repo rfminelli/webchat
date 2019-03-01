@@ -376,13 +376,13 @@ $(document).ready(function(){
         	var message = $(this).val();
  			if($.trim(message) != '') {
  				newMessage(message);
+				$("#mensagem-input-field").val("");
+				$(this).attr("rows", 1);
+				h = $("#conteudo").height()
+				h -= $("#mensagem-input").height();
+				h -= $("#conteudo").find(".top-bar").height();
+				$("#chat").css("height", h+"px");
 			}
-	 		$("#mensagem-input-field").val("");
-			$(this).attr("rows", 1);
-			h = $("#conteudo").height()
-			h -= $("#mensagem-input").height();
-			h -= $("#conteudo").find(".top-bar").height();
-			$("#chat").css("height", h+"px");
         	return false;
     	}
     	return true;
