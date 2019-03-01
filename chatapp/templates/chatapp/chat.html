@@ -142,7 +142,7 @@ newMessage = function(message) {
   if (!document.hasFocus()) {
       trigger_notification($('.conversa.selecionada .dados .nome').html(), message, $('.conversa.selecionada .foto img').attr("src"));
    }
-  $('.conversa.selecionada .dados .ultima-mensagem').html('<b>Você: </b>' +wpformat(wmessage));
+  $('.conversa.selecionada .dados .ultima-mensagem').html('<b>Você: </b>' +wpformat(message));
   $(".messages").animate({ scrollTop: 20000 }, "fast");
 };
 
