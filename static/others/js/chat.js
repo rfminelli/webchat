@@ -373,16 +373,16 @@ $(document).ready(function(){
         }
 
 	 	if (e.keyCode == 13 ) {
-        	var message = $(this).val();
-		$("#mensagem-input-field").val("");
- 			if($.trim(message) != '') {
-				$(this).attr("rows", 1);
-				h = $("#conteudo").height()
-				h -= $("#mensagem-input").height();
-				h -= $("#conteudo").find(".top-bar").height();
-				$("#chat").css("height", h+"px");
- 				newMessage(message);
-			}
+		var message = $(this).val()+"";
+		if($.trim(message) != '') {
+			$(this).attr("rows", 1);
+			h = $("#conteudo").height()
+			h -= $("#mensagem-input").height();
+			h -= $("#conteudo").find(".top-bar").height();
+			$("#chat").css("height", h+"px");
+			$("#mensagem-input-field").val("");
+			newMessage(message);				
+		}
         	return false;
     	}
     	return true;
