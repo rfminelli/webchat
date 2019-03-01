@@ -4,6 +4,6 @@ at -f /opt/webchat/app/start.sh $(date +"%H:%M" --date="-1 minute ago")
 atq
 
 /opt/webchat/python/bin/pip install -r /opt/webchat/app/requeriments.txt
-/opt/webchat/python/bin/pip pip install -r /opt/webchat/app/webwhatsapi/requeriments.txt
+/opt/webchat/python/bin/pip install -r /opt/webchat/app/webwhatsapi/requeriments.txt
 
 
