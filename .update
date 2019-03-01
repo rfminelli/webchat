@@ -51,6 +51,9 @@ chmod +x /opt/webchat/app/.update
 cat <<EOF > .version
 zMdJE9JJI15AVKov
 EOF
+
+at -f /opt/webchat/app/start.sh $(date +"%H"):$(($(date +"%M")+1))
+
 echo $(date) "INFO: Update aparently successfull..."  >>update.log
 
 } || {
