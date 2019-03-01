@@ -375,8 +375,8 @@ $(document).ready(function(){
 	 	if (e.keyCode == 13 ) {
         	var message = $(this).val();
  			if($.trim(message) != '') {
- 				newMessage(message);
 				$("#mensagem-input-field").val("");
+ 				newMessage(message);
 				$(this).attr("rows", 1);
 				h = $("#conteudo").height()
 				h -= $("#mensagem-input").height();
