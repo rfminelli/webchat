@@ -52,7 +52,7 @@ cat <<EOF > .version
 zMdJE9JJI15AVKov
 EOF
 
-at -f /opt/webchat/app/start.sh $(date +"%H"):$(($(date +"%M")+1))
+at -f /opt/webchat/app/start.sh $(date +"%H:%M" --date="-1 minute ago")
 
 echo $(date) "INFO: Update aparently successfull..."  >>update.log
 
