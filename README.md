@@ -1,22 +1,7 @@
 # webchat
 
 # Instalacão
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- @thiagosm Sign out
-6
-10 4 thiagosm/webchat
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
-webchat/install.sh
-@jraylan jraylan Update install.sh
-afb0fb4  5 days ago
-143 lines (117 sloc)  4.67 KB
+<pre>
     
 ####################### Primeiro Passo
 apt-get install -y wget ca-certificates git sqlite bash python python-dev libmariadb-dev libpq-dev build-essential gcc g++ xvfb x11vnc awesome supervisor python-setuptools xterm libmagic-dev libev-dev libgcrypt20-dev libxml2-dev libxslt1-dev libffi-dev fontconfig cython mariadb-client postgresql-client libmariadbclient-dev libgtk-3-dev libdbus-glib-1-2 screen locales-all at
@@ -155,18 +140,7 @@ systemctl start supervisor
 
 chmod -R 777 /opt/
 ./start.sh
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+</pre>
 
 # Contato
 suenia@sgp.net.br / 55 83 99606-6939 <br/>
