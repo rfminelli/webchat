@@ -1,3 +1,11 @@
 #!/bin/bash
 cd /opt/webchat/app
+
+if [[ -z $1 ]];then
 /opt/webchat/python/bin/python manage.pyc whatsapp
+
+else
+mkdir ~/.firefox.default.$1
+/opt/webchat/python/bin/python manage.pyc whatsapp --id=$1 --profile=~/.firefox.default.$1/
+
+fi
