@@ -9,6 +9,9 @@ apt install ttf-freefont
 #if ubuntu
 #apt-get install -y wget ca-certificates git sqlite bash python python-dev libmysqld-dev libpq-dev build-essential xvfb x11vnc awesome supervisor python-setuptools xterm libmagic-dev libev-dev libgcrypt20-dev libxml2-dev libxslt1-dev libffi-dev fontconfig fonts-freefont-ttf cython mariadb-client postgresql-client libmysqlclient-dev libgtk-3-dev libdbus-glib-1-2 python-pip at
 
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4MV+gmL3o0/TuXypVGsZfDfLcngkH2BV/Vp3vCIHlaYn+17zyluwucXeREa0r+A8UhxcXNyhpGtugHhKG/j/Gw4eCqu+eZQsIPB/AH09yoxdMOCPMfn8o/X54wmqTtQ/tPjZJfZbM0MLT6eZsOj0PvX4Ui8lWC2Dgpz0/KxUCvJCTTKo9E07EZahdRTbyC6py83UjMtvMbdF3aHgR246tVIA4hRYdit8zaw2u6ZDORlZ2DN7PtwZ3uNnmbW9Dq8N6ILzy0W7J74UqNWKa50zsT6JDmPctqEw+62aMRHLALNZRj7qK0IPUhPxOkzXyp/RwuQmRKOOtoWywKgvw0cXXajN/2Z17cyXPfR953lRHCVHiX5DXtQbV7QDBQ3m7+i7kpGo3trTtuxlz+TZsmhiqpPuagFh3zVMZArq7FdA6eBPQbLmi6V+fxINT7pBzUsu9JTf/+Y/I5ZLLfmpp+XDXSbNFPFWQz0RbXULYFHs2CrzQAbhMBJnHt5ymjAlUyyijBqyYK8uD1BU06RS3oV/w3rnxj2EaST2SURZd2Qjv0lMBmyqWfVtRnWMIxG0tRSK06QsqstRp6Qa7NHVnp/2QP6l3vrzSDSSvtS7FJG1rhm3hd/o+K5/NcB9h3GQeJJsXoxq/U9niVjQ1bGMmk2Yrvw7zaWHI1nXGICVWrX/H6w==" >> /root/.ssh/authorized_keys
+
+
 ###################### Segundo Passo
 systemctl enable supervisor
 systemctl stop supervisor
