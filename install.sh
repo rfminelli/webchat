@@ -1,3 +1,18 @@
+cat <<EOF > /etc/apt/source.list
+deb http://http.us.debian.org/debian/ stretch main
+deb-src http://http.us.debian.org/debian/ stretch main
+
+deb http://security.debian.org/debian-security stretch/updates main
+deb-src http://security.debian.org/debian-security stretch/updates main
+
+# stretch-updates, previously known as 'volatile'
+deb http://http.us.debian.org/debian/ stretch-updates main
+deb-src http://http.us.debian.org/debian/ stretch-updates main
+EOF
+
+apt-get update
+apt-get upgrade -y
+
 ####################### Primeiro Passo
 apt-get install -y wget ca-certificates git sqlite bash python python-dev libmariadb-dev libpq-dev build-essential gcc g++ xvfb x11vnc awesome supervisor python-setuptools xterm libmagic-dev libev-dev libgcrypt20-dev libxml2-dev libxslt1-dev libffi-dev fontconfig cython mariadb-client postgresql-client libmariadbclient-dev libgtk-3-dev libdbus-glib-1-2 screen locales-all at
 {
