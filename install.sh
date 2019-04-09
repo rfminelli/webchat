@@ -86,7 +86,7 @@ rm firefox-61.0.2.tar.bz2
 
 ############################### Quarto Passo
 
-cat <<EOF > /opt/webchat/app/chatapp/fixture/menu.json
+cat <<EOF > /opt/webchat/app/chatapp/fixtures/menu.json
 [
    {
       "model":"chatapp.menu",
@@ -150,7 +150,7 @@ cat <<EOF > /opt/webchat/app/chatapp/fixture/menu.json
 ]
 EOF
 
-cat <<EOF > /opt/webchat/app/chatapp/fixture/menuitem.json
+cat <<EOF > /opt/webchat/app/chatapp/fixtures/menuitem.json
 [
    {
       "model":"chatapp.menuitem",
@@ -538,7 +538,7 @@ cat <<EOF > /opt/webchat/app/chatapp/fixture/menuitem.json
 ]
 EOF
 
-cat <<EOF > /opt/webchat/app/chatapp/fixture/script.json
+cat <<EOF > /opt/webchat/app/chatapp/fixtures/script.json
 [
    {
       "model":"chatapp.script",
