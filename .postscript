@@ -21,5 +21,3 @@ sqlite3 /opt/webchat/app/data/db.sqlite3 < /tmp/fix.sql
 cp /opt/webchat/python/bin/doc/webchat@.service /etc/systemd/system/
 systemctl daemon-reload
 chmod +x /opt/webchat/app/doc/webchat/webchat
-
-
