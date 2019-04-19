@@ -14,7 +14,7 @@ apt-get update
 apt-get upgrade -y
 
 ####################### Primeiro Passo
-apt-get install -y wget ca-certificates git sqlite bash python python-dev libmariadb-dev libpq-dev build-essential gcc g++ xvfb x11vnc awesome supervisor python-setuptools xterm libmagic-dev libev-dev libgcrypt20-dev libxml2-dev libxslt1-dev libffi-dev fontconfig cython mariadb-client postgresql-client libmariadbclient-dev libgtk-3-dev libdbus-glib-1-2 screen locales-all at
+apt-get install -y wget ca-certificates git sqlite bash python python-dev libmariadb-dev libpq-dev build-essential gcc g++ supervisor python-setuptools xterm libmagic-dev libev-dev libgcrypt20-dev libxml2-dev libxslt1-dev libffi-dev fontconfig cython mariadb-client postgresql-client libmariadbclient-dev libgtk-3-dev libdbus-glib-1-2 screen locales-all at
 {
  apt install fonts-freefont-ttf
 } ||
@@ -63,28 +63,23 @@ PATH=/opt/webchat/bin:$PATH
 EOF
 
 source /etc/environment
-PW=$(openssl rand --hex 16)
-# noVNC
-git clone https://github.com/kanaka/noVNC.git /opt/noVNC
-git clone https://github.com/kanaka/websockify /opt/noVNC/utils/websockify
-ln -s /opt/noVNC/vnc.html /opt/noVNC/index.html
-x11vnc -storepasswd $PW /opt/vncpasswd
-
-# geckodriver
-wget https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux64.tar.gz -O /tmp/geckodriver.tar.gz
-cd /usr/local/bin
-tar zxvf /tmp/geckodriver.tar.gz
-chmod +x geckodriver
-rm /tmp/geckodriver.tar.gz
-
-# firefox 
-cd /opt/
-wget https://ftp.mozilla.org/pub/firefox/releases/61.0.2/linux-x86_64/pt-BR/firefox-61.0.2.tar.bz2 
-tar jxvf firefox-61.0.2.tar.bz2 
-ln -s /opt/firefox/firefox /usr/local/bin/firefox
-rm firefox-61.0.2.tar.bz2
 
 ############################### Quarto Passo
+
+
+cat <<EOF > /opt/webchat/app/chatapp/fixtures/token.json
+[
+   {
+      "model":"chatapp.token",
+      "pk":1,
+      "fields":{
+         "token":"$(cat /proc/sys/kernel/random/uuid)",
+         "date_created": $(date +\"%Y-%m-%dT%H:%M:%S.%3N\"),
+         "date_modified": $(date +\"%Y-%m-%dT%H:%M:%S.%3N\")
+      }
+   }
+]
+EOF
 
 cat <<EOF > /opt/webchat/app/chatapp/fixtures/menu.json
 [
@@ -593,6 +588,7 @@ mkdir data
 /opt/webchat/python/bin/python manage.pyc makemigrations 
 /opt/webchat/python/bin/python manage.pyc migrate
 /opt/webchat/python/bin/python manage.pyc loaddata user
+/opt/webchat/python/bin/python manage.pyc loaddata token
 /opt/webchat/python/bin/python manage.pyc loaddata source
 /opt/webchat/python/bin/python manage.pyc loaddata group
 /opt/webchat/python/bin/python manage.pyc loaddata script
