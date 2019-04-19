@@ -377,7 +377,7 @@ $(document).ready(function(){
  			if($.trim(message) != '') {
  				newMessage(message);
 			}
-	 		$("#mensagem-input-field").val("");
+ 			$("#mensagem-input-field").val("");
 			$(this).attr("rows", 1);
 			h = $("#conteudo").height()
 			h -= $("#mensagem-input").height();
@@ -493,3 +493,4 @@ $(document).ready(function(){
 	};
 	//trigger_notification("teste", "teste", "https://postcron.com/pt/blog/wp-content/uploads/2016/05/foto-de-perfil-para-trabalho.jpg");
 });
+

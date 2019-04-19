@@ -96,10 +96,8 @@ clearInterval(hasNewMessagesTimer);
 
 function chatAction(url) { 
       $.getJSON(url, function( data ) {
-      if(data.message) {
         alert(data.message);
         window.location.reload();
-      }
     });
 }
 
@@ -143,7 +141,7 @@ newMessage = function(message) {
       trigger_notification($('.conversa.selecionada .dados .nome').html(), message, $('.conversa.selecionada .foto img').attr("src"));
    }
   $('.conversa.selecionada .dados .ultima-mensagem').html('<b>Você: </b>' +wpformat(message));
-  $(".messages").animate({ scrollTop: 20000 }, "fast");
+  $(".messages").animate({ scrollTop: 20000*20000 }, "fast");
 };
 
 
