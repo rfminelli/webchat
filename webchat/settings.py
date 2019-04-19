@@ -66,7 +66,7 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL = '/admin/login'
 
-API_URL = 'http://localhost:7000/api'
+API_URL = 'http://localhost:8000/api'
 
 TEMPLATES = [
     {
